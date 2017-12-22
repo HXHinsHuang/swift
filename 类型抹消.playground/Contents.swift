@@ -7,11 +7,10 @@ import UIKit
 struct FibsIterator: IteratorProtocol {
     var status = (0, 1)
     mutating func next() -> Int? {
-        guard status.1 < 100 else { return nil }
-        let temp = status.1
-        status.1 = status.0 + status.1
-        status.0 = temp
-        return status.0
+        guard status.0 < 100 else { return nil }
+        let num = status.0
+        self.status = (status.1, status.0 + status.1)
+        return num
     }
 }
 
@@ -55,11 +54,10 @@ protocol MyIteratorProtocol {
 struct FibsIterator: MyIteratorProtocol {
     var status = (0, 1)
     mutating func next() -> Int? {
-        guard status.1 < 100 else { return nil }
-        let temp = status.1
-        status.1 = status.0 + status.1
-        status.0 = temp
-        return status.0
+        guard status.0 < 100 else { return nil }
+        let num = status.0
+        self.status = (status.1, status.0 + status.1)
+        return num
     }
 }
 
@@ -169,6 +167,7 @@ let Boxs = [fibsIteratorBox, squareIteratorBox]
 
 
 //var fib1 = FibsIterator()
+//print(fib1.next()!) // 0
 //print(fib1.next()!) // 1
 //print(fib1.next()!) // 1
 //var fib2 = fib1
@@ -176,6 +175,8 @@ let Boxs = [fibsIteratorBox, squareIteratorBox]
 //print(fib1.next()!) // 3
 //print(fib2.next()!) // 2
 //print(fib2.next()!) // 3
+
+print(fibsIteratorBox.next()!) // 0
 print(fibsIteratorBox.next()!) // 1
 print(fibsIteratorBox.next()!) // 1
 let fibsBox2 = fibsIteratorBox
